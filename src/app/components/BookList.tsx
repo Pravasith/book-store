@@ -18,7 +18,7 @@ const BookList = () => {
         <Button onClick={addBookHandler}>Add a new Book</Button>
       </div>
 
-      <ul className="flex flex-col gap-y-2">
+      <ul className="flex flex-col gap-y-4">
         {books.map((book, i) => {
           return (
             <Book

@@ -128,7 +128,7 @@ body {
   }
 
   p {
-    @apply text-base text-gray-500;
+    @apply text-base text-gray-400;
   }
 
   .small-p {
