@@ -4,7 +4,7 @@ import Modal from "@/app/components/Modal";
 import BooksLayout from "../CustomLayout";
 import { AppDispatch, useAppSelector } from "@/app/redux/store";
 import { useDispatch } from "react-redux";
-import { addBook, updateBook } from "@/app/redux/slices";
+import { addBook, clearActiveBook, updateBook } from "@/app/redux/slices";
 import { BookType } from "@/app/types";
 
 const BookDetails = () => {
@@ -30,6 +30,7 @@ const BookDetails = () => {
   };
 
   const handleClose = () => {
+    dispatch(clearActiveBook());
     router.push("/");
   };
 

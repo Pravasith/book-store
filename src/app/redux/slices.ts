@@ -35,6 +35,15 @@ export const bookSlice = createSlice({
       };
     },
 
+    clearActiveBook: (state) => {
+      return {
+        value: {
+          ...state.value,
+          activeBook: null,
+        },
+      };
+    },
+
     editBook: (state, action: PayloadAction<string>) => {
       const activeBook = state.value.books.find((book) => {
         return book.uuid === action.payload;
@@ -50,6 +59,7 @@ export const bookSlice = createSlice({
 
     updateBook: (state, action: PayloadAction<BookType>) => {
       const books: BookType[] = [];
+
       if (state.value.activeBook) {
         const currentBookUuid = state.value.activeBook.uuid;
 
@@ -94,5 +104,7 @@ export const bookSlice = createSlice({
   },
 });
 
-export const { addBook, deleteBook, updateBook, editBook } = bookSlice.actions;
+export const { addBook, deleteBook, updateBook, editBook, clearActiveBook } =
+  bookSlice.actions;
+
 export default bookSlice.reducer;
