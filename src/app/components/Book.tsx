@@ -3,24 +3,33 @@ import Button from "./Button";
 import Icon from "./Icon";
 import Tag from "./Tag";
 
-interface Props extends BookType {}
+interface Props extends BookType {
+  deleteBook: (uuid: string) => void;
+  editBook: (uuid: string) => void;
+}
 
-const Book = (book: Props) => {
+const Book = (props: Props) => {
   return (
-    <li className="mx-10 p-8 border-white rounded-3xl border flex flex-col gap-y-2 hover:bg-gray-800 active:bg-gray-900 cursor-pointer transition-colors">
+    <li
+      onClick={() => props.editBook(props.uuid?.toString() || "")}
+      className="mx-10 p-8 border-white rounded-3xl border flex flex-col gap-y-2 hover:bg-gray-800 active:bg-gray-900 cursor-pointer transition-colors"
+    >
       <div className="flex justify-between items-center">
-        <h4>{book.title}</h4>
+        <h4>{props.title}</h4>
 
-        <Button className="w-fit ml-8">
+        <Button
+          onClick={() => props.deleteBook(props.uuid?.toString() || "")}
+          className="w-fit ml-8"
+        >
           <Icon name="DELETE" />
         </Button>
       </div>
 
-      <p className="w-2/3">{book.description}</p>
+      <p className="w-2/3">{props.description}</p>
 
       <div className="flex-row-west gap-x-4 mt-4">
-        <p>$ {book.price}</p>
-        <Tag content={book.category} />
+        <p>$ {props.price}</p>
+        <Tag content={props.category} />
       </div>
     </li>
   );

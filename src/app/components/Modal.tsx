@@ -12,6 +12,7 @@ interface Props {
   initialValues: FormFields;
   finalValues: (values: FormFields) => void;
   modalTitle: string;
+  handleClose: () => void;
 }
 
 const Modal = (props: Props) => {
@@ -35,7 +36,10 @@ const Modal = (props: Props) => {
     <div className="w-screen h-screen top-0 left-0 fixed backdrop-blur">
       <div className="flex-col-center w-full h-full">
         <div className="relative">
-          <Button className="w-fit absolute left-1/2 -translate-x-1/2 -top-16 cursor-pointer">
+          <Button
+            onClick={props.handleClose}
+            className="w-fit absolute left-1/2 -translate-x-1/2 -top-16 cursor-pointer"
+          >
             <Icon name="CLOSE" />
           </Button>
 
