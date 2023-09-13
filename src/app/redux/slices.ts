@@ -1,26 +1,28 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import books from "@/app/lib";
+import { BookType } from "@/app/types";
 
 type InitialState = {
-  value: AuthState;
+  value: { books: BookType[] };
 };
 
-type AuthState = {
-  name: string;
-  uid: string;
-};
-
-const initialState = {
+const initialState: InitialState = {
   value: {
-    name: "lyreai",
-    uid: "",
+    books,
   },
 };
 
-export const editBooks = createSlice({
-  name: "edit",
+export const bookSlice = createSlice({
+  name: "books",
   initialState,
   reducers: {
-    editBooks: () => {
+    addBook: () => {
+      return initialState;
+    },
+    editBook: () => {
+      return initialState;
+    },
+    deleteBook: () => {
       return initialState;
     },
   },

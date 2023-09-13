@@ -1,16 +1,17 @@
 import BookList from "../components/BookList";
+import { BooksProvider } from "../redux/provider";
 
 interface Props {
   children: React.ReactNode;
 }
 
-// app/@books/layout.tsx
 const BooksLayout = (props: Props) => {
   return (
-    <>
+    <BooksProvider>
       {props.children}
+
       <BookList />
-    </>
+    </BooksProvider>
   );
 };
 

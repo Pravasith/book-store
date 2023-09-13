@@ -1,4 +1,4 @@
-import books from "../store";
+import books from "../lib";
 import Book from "./Book";
 
 const BookList = () => {

@@ -14,8 +14,7 @@ const BookDetails = () => {
   return (
     <>
       <Link href={"/"}>GO BACK TO HOME</Link>
-
-      <Modal initialValues={initialValues} />
+      <Modal modalTitle={"Edit Book"} initialValues={initialValues} />
     </>
   );
 };

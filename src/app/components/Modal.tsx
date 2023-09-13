@@ -1,13 +1,8 @@
 "use client";
 
-import { FormEvent, useEffect } from "react";
+import { FormEvent } from "react";
 import Button from "./Button";
 import { useForm } from "../hooks/useForm";
-
-type Label = {
-  name: string;
-  title: string;
-};
 
 type FormFields = {
   title: string;
@@ -18,12 +13,13 @@ type FormFields = {
 
 interface Props {
   initialValues: FormFields;
+  modalTitle: string;
 }
 
 const Modal = (props: Props) => {
   const { values, handler } = useForm<FormFields>(props.initialValues);
 
-  const inputData: (keyof FormFields)[] = [
+  const inputFieldNames: (keyof FormFields)[] = [
     "title",
     "description",
     "price",
@@ -32,39 +28,50 @@ const Modal = (props: Props) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(values);
   };
 
   return (
     <div className="w-screen h-screen top-0 left-0 fixed backdrop-blur">
       <div className="flex-col-center w-full h-full">
-        <div className="bg-theme-gray-300 relative">
+        <div className="relative">
           <div className="absolute -right-4 -top-4 cursor-pointer">X</div>
 
-          <div className="p-4 border-white rounded-lg border-2">
+          <div className="p-4 border-white bg-gray-700/50 rounded-3xl border-2">
+            <div className="flex-row-center w-full mb-8 mt-2">
+              <h2>{props.modalTitle}</h2>
+            </div>
+
             <form
-              className="flex-col-west gap-y-4 min-w-[30vw]"
+              className="flex-col-west gap-y-4 min-w-[30vw] m-4"
               method="post"
               onSubmit={handleSubmit}
             >
-              {inputData.map((label, i) => {
+              {inputFieldNames.map((inputField, i) => {
                 return (
-                  <label key={"label-" + i}>
-                    {label}
+                  <label
+                    className="flex-row justify-between flex w-full"
+                    key={"label-" + i}
+                  >
+                    {inputField}
 
                     <input
                       className="ml-5"
-                      name={label}
-                      type="text"
-                      defaultValue={props.initialValues[label]}
+                      name={inputField}
+                      type={
+                        typeof props.initialValues[inputField] === "number"
+                          ? "number"
+                          : "text"
+                      }
+                      defaultValue={props.initialValues[inputField]}
                       onChange={handler}
                     />
                   </label>
                 );
               })}
 
-              <div className="flex gap-x-2">
-                <Button type="reset">Reset form</Button>
-                <Button type="submit">Submit form</Button>
+              <div className="flex-row-center w-full mt-4">
+                <Button type="submit">Submit</Button>
               </div>
             </form>
           </div>
