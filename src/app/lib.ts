@@ -1,5 +1,7 @@
+import { BookType } from "./types";
+
 // Assume this is an API that returns books
-const books = [
+const books: BookType[] = [
   {
     uuid: "9781593279509",
     title: "Eloquent JavaScript, Third Edition",

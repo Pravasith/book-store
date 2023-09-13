@@ -16,9 +16,19 @@ export const bookSlice = createSlice({
   name: "books",
   initialState,
   reducers: {
-    addBook: () => {
-      return initialState;
+    addBook: (state, action: PayloadAction<BookType>) => {
+      const data = state.value.books;
+      // I know unshift is a slowww operation in JS
+      // makes me sick but I wanna finish this app soon lol
+      data.unshift(action.payload);
+
+      return {
+        value: {
+          books: data,
+        },
+      };
     },
+
     editBook: () => {
       return initialState;
     },
@@ -27,3 +37,6 @@ export const bookSlice = createSlice({
     },
   },
 });
+
+export const { addBook } = bookSlice.actions;
+export default bookSlice.reducer;
