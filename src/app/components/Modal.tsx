@@ -3,16 +3,14 @@
 import { FormEvent } from "react";
 import Button from "./Button";
 import { useForm } from "../hooks/useForm";
+import Icon from "./Icon";
+import { BookType } from "../types";
 
-type FormFields = {
-  title: string;
-  description: string;
-  price: number;
-  category: string;
-};
+interface FormFields extends BookType {}
 
 interface Props {
   initialValues: FormFields;
+  finalValues: (values: FormFields) => void;
   modalTitle: string;
 }
 
@@ -28,14 +26,18 @@ const Modal = (props: Props) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(values);
+
+    if (Object.values(values).every((val) => !!val)) props.finalValues(values);
+    else alert("Please fill in all the fields");
   };
 
   return (
     <div className="w-screen h-screen top-0 left-0 fixed backdrop-blur">
       <div className="flex-col-center w-full h-full">
         <div className="relative">
-          <div className="absolute -right-4 -top-4 cursor-pointer">X</div>
+          <Button className="w-fit absolute left-1/2 -translate-x-1/2 -top-16 cursor-pointer">
+            <Icon name="CLOSE" />
+          </Button>
 
           <div className="p-4 border-white bg-gray-700/50 rounded-3xl border-2">
             <div className="flex-row-center w-full mb-8 mt-2">
@@ -57,13 +59,13 @@ const Modal = (props: Props) => {
 
                     <input
                       className="ml-5"
+                      placeholder={"Enter " + inputField}
                       name={inputField}
-                      type={
-                        typeof props.initialValues[inputField] === "number"
-                          ? "number"
-                          : "text"
+                      // i'd code a better logic but since this is a small app :)
+                      type={inputField === "price" ? "number" : "text"}
+                      defaultValue={
+                        props.initialValues[inputField] ?? undefined
                       }
-                      defaultValue={props.initialValues[inputField]}
                       onChange={handler}
                     />
                   </label>

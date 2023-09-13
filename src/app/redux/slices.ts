@@ -3,12 +3,16 @@ import books from "@/app/lib";
 import { BookType } from "@/app/types";
 
 type InitialState = {
-  value: { books: BookType[] };
+  value: {
+    books: BookType[];
+    activeBook: null | BookType;
+  };
 };
 
 const initialState: InitialState = {
   value: {
     books,
+    activeBook: null,
   },
 };
 
@@ -25,6 +29,7 @@ export const bookSlice = createSlice({
       return {
         value: {
           books: data,
+          activeBook: action.payload,
         },
       };
     },

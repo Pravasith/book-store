@@ -3,5 +3,5 @@ export interface BookType {
   title: string;
   description: string;
   category: string;
-  price: number;
+  price: number | null;
 }
