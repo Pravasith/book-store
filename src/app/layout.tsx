@@ -21,7 +21,6 @@ export default function RootLayout(props: Props) {
       <body className={inter.className}>
         <main>
           <Nav />
-
           {props.books}
         </main>
       </body>

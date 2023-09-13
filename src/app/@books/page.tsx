@@ -1,11 +1,9 @@
-import Link from "next/link";
+import BooksLayout from "./CustomLayout";
 
-// app/@books/page.tsx
 export default function Books() {
   return (
-    <>
-      <h1>----- BOOK HOME -----</h1>
-      <Link href={"/book-details"}>GO TO BOOK DETAILS</Link>
-    </>
+    <BooksLayout>
+      <></>
+    </BooksLayout>
   );
 }
