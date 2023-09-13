@@ -18,13 +18,14 @@ const BookList = () => {
   const deleteBookHandler = (uuid: string) => {
     dispatch(deleteBook(uuid));
   };
+
   const editBookHandler = (uuid: string) => {
     dispatch(editBook(uuid));
     router.push("/book-details");
   };
 
   return (
-    <section className="flex-col-center my-8 mx-[20vh]">
+    <section className="flex-col-center w-full my-8 px-[20vh]">
       <div className="flex-row-center my-12">
         <Button onClick={addBookHandler}>Add a new Book</Button>
       </div>
