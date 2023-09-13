@@ -11,14 +11,19 @@ interface Props extends BookType {
 const Book = (props: Props) => {
   return (
     <li
-      onClick={() => props.editBook(props.uuid?.toString() || "")}
+      onClick={() => {
+        props.editBook(props.uuid?.toString() || "");
+      }}
       className="mx-10 p-8 border-white rounded-3xl border flex flex-col gap-y-2 hover:bg-gray-800 active:bg-gray-900 cursor-pointer transition-colors"
     >
       <div className="flex justify-between items-center">
         <h4>{props.title}</h4>
 
         <Button
-          onClick={() => props.deleteBook(props.uuid?.toString() || "")}
+          onClick={(e) => {
+            e.stopPropagation();
+            props.deleteBook(props.uuid?.toString() || "");
+          }}
           className="w-fit ml-8"
         >
           <Icon name="DELETE" />
